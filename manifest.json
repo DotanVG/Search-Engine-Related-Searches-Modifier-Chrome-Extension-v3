@@ -1,0 +1,45 @@
+{
+    // Comments are accepted in the manifest, even though it is JSON.
+    "manifest_version": 3,
+    "name": "Search Engine Related Searches Modifier",
+    "description": "Enhance your search engine experience by modifying and tailoring the related searches to your needs",
+    "version": "1.0.0",
+    "icons": {
+        "16": "logo/logo-16.png",
+        "32": "logo/logo-32.png",
+        "48": "logo/logo-48.png",
+        "128": "logo/logo-128.png"
+    },
+    "options_page": "settings/settings.html",
+    "action": {
+        "default_title": "Search Engine Related Searches Modifier",
+        "default_popup": "popup/popup.html"
+    },
+    "permissions": ["activeTab", "scripting"],
+    "host_permissions": [
+        "*://*.google.com/*",
+        "*://*.bing.com/*",
+        "*://*.yahoo.com/*"
+    ],
+    "background": {
+        "service_worker": "service-worker.js"
+    },
+    "content_scripts": [
+        {
+            "matches": ["*://*.google.com/*"],
+            "js": ["scripts/googleContentScript.js"]
+        },
+        {
+            "matches": ["*://*.bing.com/*"],
+            "js": ["scripts/bingContentScript.js"]
+        },
+        {
+            "matches": ["*://*.yahoo.com/*"],
+            "js": ["scripts/yahooContentScript.js"]
+        },
+        {
+          "matches": ["<all_urls>"],
+          "js": ["foreground.js"]
+        }
+      ]
+}
